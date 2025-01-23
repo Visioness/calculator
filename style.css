@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
 *, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-weight: 800;
+  font-weight: 900;
+  font-size: 20px;
+  font-family: "Orbitron", serif;
 }
 
 body {
@@ -10,32 +14,64 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: rgba(27, 13, 92, 0.589);
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  border: 3px solid lightcoral;
-  border-radius: 24px;
-  background-color: rgba(0, 0, 0, 0.192);
+  border: 3px solid rgb(150, 150, 150);
+  border-radius: 27px;
+  background-color: rgba(51, 51, 51, 0.61);
+  box-shadow: 10px 10px 30px;
 }
 
 .display {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 40px;
-  padding: 4px;
-  margin-bottom: 10px;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 10px 15px inset rgba(0, 0, 0, 0.295);
-  background-color: rgba(194, 80, 80, 0.137);
+  height: 50px;
+  padding: 4px 12px;
+  border-bottom: 2px solid black;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 10px 25px inset rgba(0, 0, 0, 0.425);
+  background-color: rgba(184, 180, 206, 0.226);
 }
 
 .buttons {
   display: flex;
-  padding: 10px;
+  flex-direction: column;
+  padding: 20px;
   gap: 20px;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 0 25px inset rgba(0, 0, 0, 0.425);
+}
+
+.sub-container {
+  display: flex;
+  gap: 20px;
+}
+
+button {
+  border: 0;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 2px 2px 5px black;
+}
+
+button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 5px black;
+}
+
+button:active {
+  transform: translate(0px, 0px);
+  box-shadow: 1px 1px 5px black;
+}
+
+.helpers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .numbers {
@@ -43,22 +79,66 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 180px;
+  gap: 5px 5px;
+  width: 160px;
 }
 
 .operators {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.helper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(150, 150, 150);
+  border: 2px solid black;
+  border-radius: 12px;
+}
+
+.helper:hover {
+  background-color: rgba(100, 255, 100, 0.6);
 }
 
 .number {
-  width: 60px;
+  width: 50px;
   height: 60px;
-  border-radius: 22px;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: rgb(200, 200, 200);
+}
+
+.number:hover {
+  background-color: rgba(255, 100, 100, 0.6);
+  color: rgb(255, 255, 100);
 }
 
 .operator {
   height: 48px;
-  width: 32px;
+  width: 36px;
+  border: 2px solid black;
   border-radius: 22px;
+  background-color: rgb(150, 150, 150);
+}
+
+.operator:hover {
+  background-color: rgba(100, 100, 255, 0.6);
+  color: rgb(255, 100, 255);
+}
+
+.highlight-operator {
+  color: rgb(255, 100, 255);
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.highlight-number {
+  color: rgb(220, 220, 220);
+  font-weight: 600;
+  font-size: 20px;
 }
