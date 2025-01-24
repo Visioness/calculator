@@ -58,6 +58,7 @@ function undo() {
   }
 }
 
+
 function toggleErrorMessage() {
   errorMessage.textContent = "You can not use numbers that has more than 6 digits!";
   setTimeout(() => errorMessage.textContent = "", 4000);
@@ -112,6 +113,11 @@ function defineNumbers(clickedOperator) {
 }
 
 
+function isDefined(number) {
+  return number !== "";
+}
+
+
 function formatNumber(number) {
   number = number.toString();
   if (number.indexOf(".") !== -1) {
@@ -120,11 +126,6 @@ function formatNumber(number) {
     }
   } 
   return number;
-}
-
-
-function isDefined(number) {
-  return number !== "";
 }
 
 
