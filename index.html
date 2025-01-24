@@ -9,7 +9,12 @@
 </head>
   <body>
     <div class="container">
-      <div class="display"></div>
+      <div class="display">
+        <span class="highlight-number" id="firstNumber"></span>
+        <span class="highlight-operator" id="operator"></span>
+        <span class="highlight-number" id="secondNumber"></span>
+        <span id="result-preview"></span>
+      </div>
       <div class="buttons">
         <div class="helpers">
           <button class="helper" id="clear">C</button>
@@ -41,5 +46,6 @@
         </div>
       </div>
     </div>
+    <div id="error-message"></div>
   </body>
 </html>
