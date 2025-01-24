@@ -108,7 +108,6 @@ function defineNumbers(clickedOperator) {
   }
   if (operator === "=") {
     operator = "";
-    
   };
 }
 
