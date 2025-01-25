@@ -64,6 +64,11 @@ body {
   gap: 20px;
 }
 
+.active {
+  transform: translate(0px, 0px);
+  box-shadow: 1px 1px 5px black;
+}
+
 button {
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
   box-shadow: 2px 2px 5px black;
@@ -72,6 +77,21 @@ button {
 button:hover {
   transform: translate(-2px, -2px);
   box-shadow: 3px 3px 5px black;
+}
+
+.helper:hover {
+  background-color: rgba(100, 255, 100, 0.6);
+  color: rgb(0, 0, 0);
+}
+
+.number:hover {
+  background-color: rgba(255, 100, 100, 0.6);
+  color: rgb(255, 255, 100);
+}
+
+.operator:hover {
+  background-color: rgba(100, 100, 255, 0.6);
+  color: rgb(255, 100, 255);
 }
 
 button:active {
@@ -85,6 +105,26 @@ button:disabled:hover {
   background-color: rgba(0, 0, 0, 0.466);
   box-shadow: 1px 1px 5px black;
   transform: none;
+}
+
+.active.hover-helper {
+  background-color: rgba(100, 255, 100, 0.6);
+  color: rgb(0, 0, 0);
+}
+
+.active.hover-number {
+  background-color: rgba(255, 100, 100, 0.6);
+  color: rgb(255, 255, 100);
+}
+
+.active.hover-operator {
+  background-color: rgba(100, 100, 255, 0.6);
+  color: rgb(255, 100, 255);
+}
+
+.active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 5px black;
 }
 
 .helpers {
@@ -120,10 +160,6 @@ button:disabled:hover {
   border-radius: 12px;
 }
 
-.helper:hover {
-  background-color: rgba(100, 255, 100, 0.6);
-}
-
 .number {
   width: 50px;
   height: 60px;
@@ -132,22 +168,12 @@ button:disabled:hover {
   background-color: rgb(200, 200, 200);
 }
 
-.number:hover {
-  background-color: rgba(255, 100, 100, 0.6);
-  color: rgb(255, 255, 100);
-}
-
 .operator {
   height: 48px;
   width: 36px;
   border: 2px solid black;
   border-radius: 22px;
   background-color: rgb(150, 150, 150);
-}
-
-.operator:hover {
-  background-color: rgba(100, 100, 255, 0.6);
-  color: rgb(255, 100, 255);
 }
 
 .highlight-operator {

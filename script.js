@@ -2,6 +2,7 @@ let firstNumber = "";
 let secondNumber = "";
 let currentNumber = "";
 let operator = "";
+let tempKey = "";
 const maxDigits = 6;
 
 const display = document.querySelector(".display");
@@ -24,13 +25,50 @@ const keys = {
   helpers: ["Escape", "Backspace"],
 }
 
+const keyToIdMap = {
+  "+": "addition",
+  "-": "subtraction",
+  "*": "multiplication",
+  "/": "division",
+  "=": "equality",
+  ".": "point",
+  "0": "zero",
+  "1": "one",
+  "2": "two",
+  "3": "three",
+  "4": "four",
+  "5": "five",
+  "6": "six",
+  "7": "seven",
+  "8": "eight",
+  "9": "nine",
+}
+
 // Keyboard support!
 document.addEventListener("keyup", (event) => {
-  if (keys.numbers.includes(event.key)) handleNumbers(event.key);
-  else if (keys.operators.includes(event.key)) handleOperators(event.key);
-  else if (event.key === keys.helpers[0]) clearDisplay();
-  else if (event.key === keys.helpers[1]) undo();
-
+  if (keys.numbers.includes(event.key)) {
+    const pressedElement = document.getElementById(keyToIdMap[event.key]);
+    pressedElement.classList.add("active", "hover-number");
+    setTimeout(() => pressedElement.classList.remove("active", "hover-number"), 300);
+    handleNumbers(event.key);
+  }
+  else if (keys.operators.includes(event.key)) {
+    if (event.key === "Enter") tempKey = "=";
+    const pressedElement = document.getElementById(keyToIdMap[tempKey || event.key]);
+    pressedElement.classList.add("active", "hover-operator");
+    setTimeout(() => pressedElement.classList.remove("active", "hover-operator"), 300);
+    handleOperators(tempKey || event.key);
+  }
+  else if (event.key === keys.helpers[0]) {
+    clearButton.classList.add("active", "hover-helper");
+    setTimeout(() => clearButton.classList.remove("active", "hover-helper"), 300);
+    clearDisplay();
+  }
+  else if (event.key === keys.helpers[1]) {
+    backspaceButton.classList.add("active", "hover-helper");
+    setTimeout(() => backspaceButton.classList.remove("active", "hover-helper"), 300);
+    undo();
+  }
   updateDisplay();
 });
 
@@ -70,8 +108,8 @@ function handleNumbers(input) {
 
 
 function handleOperators(input) {
-  if (input === "Enter") input = "=";
   defineNumbers(input);
+  tempKey = "";
 }
 
 
