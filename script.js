@@ -8,6 +8,7 @@ const display = document.querySelector(".display");
 const resultPreview = document.querySelector("#result-preview");
 const errorMessage = document.querySelector("#error-message");
 
+const point = document.querySelector("#point");
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const clearButton = document.querySelector("#clear");
@@ -29,7 +30,12 @@ backspaceButton.addEventListener("click", () => {
 
 numbers.forEach((element) => {
   element.addEventListener("click", () => {
-    if (currentNumber.length < maxDigits) currentNumber += element.textContent;
+    if (currentNumber.length < maxDigits) {
+      currentNumber += element.textContent;
+      if (isDefined(firstNumber) && !isDefined(operator) && isDefined(currentNumber)) {
+        firstNumber = "";
+      }
+    }
     else toggleErrorMessage();
     updateDisplay();
   });
@@ -68,10 +74,14 @@ function toggleErrorMessage() {
 function clearDisplay() {
   firstNumber = secondNumber = currentNumber = operator = "";
   resultPreview.textContent = firstNumberSpan.textContent = secondNumberSpan.textContent = operatorSpan.textContent = "";
+  point.disabled = false;
 }
 
 
 function updateDisplay() {
+  if (currentNumber.includes(".")) point.disabled = true;
+  else point.disabled = false;
+  
   if (isDefined(firstNumber)) {
     firstNumberSpan.textContent = firstNumber;
     operatorSpan.textContent = operator;
