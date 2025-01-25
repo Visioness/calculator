@@ -65,7 +65,6 @@ body {
 }
 
 button {
-  border: 0;
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
   box-shadow: 2px 2px 5px black;
 }
@@ -78,6 +77,14 @@ button:hover {
 button:active {
   transform: translate(0px, 0px);
   box-shadow: 1px 1px 5px black;
+}
+
+button:disabled,
+button:disabled:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.466);
+  box-shadow: 1px 1px 5px black;
+  transform: none;
 }
 
 .helpers {
