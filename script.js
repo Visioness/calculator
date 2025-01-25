@@ -18,6 +18,21 @@ const firstNumberSpan = document.querySelector("#firstNumber");
 const secondNumberSpan = document.querySelector("#secondNumber");
 const operatorSpan = document.querySelector("#operator");
 
+const keys = {
+  numbers: [".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  operators: ["Enter", "=", "/", "*", "-", "+"],
+  helpers: ["Escape", "Backspace"],
+}
+
+// Keyboard support!
+document.addEventListener("keyup", (event) => {
+  if (keys.numbers.includes(event.key)) handleNumbers(event.key);
+  else if (keys.operators.includes(event.key)) handleOperators(event.key);
+  else if (event.key === keys.helpers[0]) clearDisplay();
+  else if (event.key === keys.helpers[1]) undo();
+
+  updateDisplay();
+});
 
 clearButton.addEventListener("click", () => {
   clearDisplay();
@@ -30,23 +45,96 @@ backspaceButton.addEventListener("click", () => {
 
 numbers.forEach((element) => {
   element.addEventListener("click", () => {
-    if (currentNumber.length < maxDigits) {
-      currentNumber += element.textContent;
-      if (isDefined(firstNumber) && !isDefined(operator) && isDefined(currentNumber)) {
-        firstNumber = "";
-      }
-    }
-    else toggleErrorMessage();
+    handleNumbers(element.textContent);
     updateDisplay();
   });
 });
 
 operators.forEach((element) => {
   element.addEventListener("click", () => {
-    defineNumbers(element);
+    handleOperators(element.textContent);
     updateDisplay();
   });
 });
+
+
+function handleNumbers(input) {
+  if (currentNumber.length < maxDigits) {
+    currentNumber += input;
+    if (isDefined(firstNumber) && !isDefined(operator) && isDefined(currentNumber)) {
+      firstNumber = "";
+    }
+  }
+  else toggleErrorMessage();
+}
+
+
+function handleOperators(input) {
+  if (input === "Enter") input = "=";
+  defineNumbers(input);
+}
+
+
+function defineNumbers(input) {
+  if (isDefined(currentNumber)) {
+    if (!isDefined(firstNumber)) {
+      firstNumber = currentNumber;
+    }
+    else if (isDefined(currentNumber) && !isDefined(secondNumber)) {
+      secondNumber = currentNumber;
+      firstNumber = formatNumber(operate(Number(firstNumber), operator, Number(secondNumber)));
+      secondNumber = "";
+    }
+    currentNumber = "";
+    operator = input;
+  }
+  else if (isDefined(firstNumber)) {
+    operator = input;
+  }
+  if (operator === "=") {
+    operator = "";
+  };
+}
+
+
+function isDefined(number) {
+  return number !== "";
+}
+
+
+function formatNumber(number) {
+  number = number.toString();
+  if (number.indexOf(".") !== -1) {
+    if (number.slice(number.indexOf(".") + 1, number.length).length > 2) {
+      return Number(number).toFixed(2);
+    }
+  } 
+  return number;
+}
+
+
+function operate(a, operator, b) {
+  function add(a, b) {
+    return a + b;
+  }
+  
+  function subtract(a, b) {
+    return a - b;
+  }
+  
+  function multiply(a, b) {
+    return a * b;
+  }
+  
+  function division(a, b) {
+    return a / b;
+  }
+
+  if (operator === "+") return add(a, b);
+  if (operator === "-") return subtract(a, b);
+  if (operator === "*") return multiply(a, b);
+  if (operator === "/") return division(a, b);
+}
 
 
 function undo() {
@@ -97,66 +185,4 @@ function updateDisplay() {
   } else {
     firstNumberSpan.textContent = currentNumber;
   }
-}
-
-
-function defineNumbers(clickedOperator) {
-  if (isDefined(currentNumber)) {
-    if (!isDefined(firstNumber)) {
-      firstNumber = currentNumber;
-    }
-    else if (isDefined(currentNumber) && !isDefined(secondNumber)) {
-      secondNumber = currentNumber;
-      firstNumber = formatNumber(operate(Number(firstNumber), operator, Number(secondNumber)));
-      secondNumber = "";
-    }
-    currentNumber = "";
-    operator = clickedOperator.textContent;
-  }
-  else if (isDefined(firstNumber)) {
-    operator = clickedOperator.textContent;
-  }
-  if (operator === "=") {
-    operator = "";
-  };
-}
-
-
-function isDefined(number) {
-  return number !== "";
-}
-
-
-function formatNumber(number) {
-  number = number.toString();
-  if (number.indexOf(".") !== -1) {
-    if (number.slice(number.indexOf(".") + 1, number.length).length > 2) {
-      return Number(number).toFixed(2);
-    }
-  } 
-  return number;
-}
-
-
-function operate(a, operator, b) {
-  function add(a, b) {
-    return a + b;
-  }
-  
-  function subtract(a, b) {
-    return a - b;
-  }
-  
-  function multiply(a, b) {
-    return a * b;
-  }
-  
-  function division(a, b) {
-    return a / b;
-  }
-
-  if (operator === "+") return add(a, b);
-  if (operator === "-") return subtract(a, b);
-  if (operator === "*") return multiply(a, b);
-  if (operator === "/") return division(a, b);
 }
