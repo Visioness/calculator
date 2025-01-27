@@ -192,8 +192,12 @@ function undo() {
 
 
 function toggleErrorMessage() {
-  errorMessage.textContent = "You can not use numbers that has more than 6 digits!";
-  setTimeout(() => errorMessage.textContent = "", 4000);
+  document.querySelector(".info").style.opacity = "1";
+  errorMessage.textContent = "Maximum number of digits allowed is 6!";
+  setTimeout(() => {
+    document.querySelector(".info").style.opacity = "0";
+    errorMessage.textContent = "";
+  }, 4000);
 }
 
 
